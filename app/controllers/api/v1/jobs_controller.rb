@@ -2,10 +2,12 @@ class Api::V1::JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     company = @job.company
+    render json: @job
   end
 
   def index
     @jobs = Job.all
+    render json: @jobs
   end
 
   def new
@@ -21,6 +23,8 @@ class Api::V1::JobsController < ApplicationController
     end
     redirect_to @job
   end
+
+
 
   private
 
