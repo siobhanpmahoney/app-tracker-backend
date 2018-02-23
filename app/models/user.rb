@@ -20,6 +20,8 @@ class User < ApplicationRecord
     end
   end
 
+    
+
   # def add_jobs (title, date_published, contents, museId, location, level, company_id)
   #   job = Job.create(
   #     title: title,

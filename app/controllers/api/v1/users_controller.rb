@@ -41,14 +41,25 @@ class Api::V1::UsersController < ApplicationController
   def user_jobs
     @user = User.find(params[:id])
     user_jobs = @user.jobs
-
     render json: user_jobs
   end
 
   def add_jobs
     @user = User.find(params[:id])
-    @job = Job.create(title: params[:jobs][:title], date_published: params[:jobs][:date_published], contents: params[:jobs][:contents], museId: params[:jobs][:museId], location: params[:jobs][:location], level: params[:jobs][:level], company_id: Company.all.sample.id)
+    
+    @job = Job.create(
+      title: params[:jobs][:title],
+      date_published: params[:jobs][:date_published],
+      contents: params[:jobs][:contents],
+      museId: params[:jobs][:museId],
+      location: params[:jobs][:location],
+      level: params[:jobs][:level],
+      date_saved: DateTime.now,
+      applied_status: false,
+      company_id: Company.all.sample.id)
     @user.jobs << @job
+
+    render json: @user.jobs
 
   end
 
