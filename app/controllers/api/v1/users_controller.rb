@@ -7,11 +7,11 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    user_jobs = @user.jobs
-    user_bookmarks = @user.bookmarks
-    user_notes = @user.notes
-    user_profile = {user: @user, jobs: user_jobs, notes: user_notes, bookmarks: user_bookmarks}
-    render json: user_profile, status: 200
+    jobs = @user.jobs
+    bookmarks = @user.bookmarks
+    notes = @user.notes
+    user_info = {user: @user, jobs: jobs, bookmarks: bookmarks, notes: notes}
+    render json: user_info, status: 200
   end
 
   def new
@@ -38,12 +38,28 @@ class Api::V1::UsersController < ApplicationController
     render json: @user
   end
 
+  def user_jobs
+    @user = User.find(params[:id])
+    user_jobs = @user.jobs
+
+    render json: user_jobs
+  end
+
+  def add_jobs
+    @user = User.find(params[:id])
+    @job = Job.create(title: params[:jobs][:title], date_published: params[:jobs][:date_published], contents: params[:jobs][:contents], museId: params[:jobs][:museId], location: params[:jobs][:location], level: params[:jobs][:level], company_id: Company.all.sample.id)
+    @user.jobs << @job
+
+  end
+
 
 
 private
 
 def user_params
-  params.requre(:user).permit(:username, :password, :password_confirmation)
+  params.require(:user).permit(:username, job_ids: [], jobs_attributes: [:title, :date_published, :contents, :museId, :location, :level, :date_saved, :applied_status, :date_applied, :response_date, :followup_date, :interview_invite, :interview_1_date, :interview_1_type, :interview_2_date, :interview_2_type, :company_id]
+    # , :password, :password_confirmation)
+  )
 end
 
 

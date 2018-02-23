@@ -10,9 +10,13 @@ Rails.application.routes.draw do
       resources :jobs
       resources :companies
 
-      post '/login', to: 'auth#login'
-      get '/current_user', to: 'auth#currentUser'
-      post '/signup', to: 'auth#signup'
+      get '/users/:id/jobs', to: 'users#user_jobs'
+      get '/users/:id/jobs', to: 'user#add_jobs'
+      post '/users/:id/jobs', to: 'users#add_jobs'
+
+      # post '/login', to: 'auth#login'
+      # get '/current_user', to: 'auth#currentUser'
+      # post '/signup', to: 'auth#signup'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
