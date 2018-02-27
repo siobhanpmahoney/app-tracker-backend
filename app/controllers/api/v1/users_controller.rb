@@ -44,15 +44,16 @@ class Api::V1::UsersController < ApplicationController
     render json: user_jobs
   end
 
+  def user_companies
+    @user = User.find(params[:id])
+    render json: @user.user_companies
+  end
+
   def add_jobs
 
     @user = User.find(params[:id])
 
-    puts params[:jobs][:company_museId]
-
     @company = Company.find_or_create_by(museId: params[:jobs][:company_museId])
-
-    
 
     apiUrl = "https://api-v2.themuse.com/companies/" + @company.museId.to_s + "?api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00"
 
@@ -80,7 +81,8 @@ class Api::V1::UsersController < ApplicationController
       company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
       applied_status: false,
-      company_id: @company.id
+      company_id: @company.id,
+      company: @company
     )
 
     @user.jobs << @job

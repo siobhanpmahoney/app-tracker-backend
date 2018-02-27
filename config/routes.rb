@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get '/users/:id/jobs', to: 'user#add_jobs'
       post '/users/:id/jobs', to: 'users#add_jobs'
 
+      get '/users/:id/companies', to: 'users#user_companies'
+
       # post '/login', to: 'auth#login'
       # get '/current_user', to: 'auth#currentUser'
       # post '/signup', to: 'auth#signup'

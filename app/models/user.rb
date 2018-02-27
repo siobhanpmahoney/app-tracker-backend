@@ -23,7 +23,7 @@ class User < ApplicationRecord
   def user_companies
     self.jobs.map do |j|
       j.company
-    end.unique
+    end
   end
 
 
