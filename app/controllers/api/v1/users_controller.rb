@@ -81,7 +81,6 @@ class Api::V1::UsersController < ApplicationController
       company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
       applied_status: false,
-      company_id: @company.id,
       company: @company
     )
 
@@ -121,16 +120,16 @@ def user_params
       :interview_1_type,
       :interview_2_date,
       :interview_2_type,
-      :company_id
-      # company_attributes: [
-      #   :name,
-      #   :size,
-      #   :location,
-      #   :description,
-      #   :museId,
-      #   :twitter,
-      #   :image_link
-      # ]
+      :company_id,
+      company: [
+        :name,
+        :size,
+        :location,
+        :description,
+        :museId,
+        :twitter,
+        :image_link
+      ]
     ]
     # , :password, :password_confirmation)
   )
