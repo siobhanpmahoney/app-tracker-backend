@@ -46,7 +46,9 @@ class Api::V1::UsersController < ApplicationController
 
   def add_jobs
     @user = User.find(params[:id])
-    
+
+    # @company
+
     @job = Job.create(
       title: params[:jobs][:title],
       date_published: params[:jobs][:date_published],
@@ -56,9 +58,10 @@ class Api::V1::UsersController < ApplicationController
       level: params[:jobs][:level],
       date_saved: DateTime.now,
       applied_status: false,
-      company_id: Company.all.sample.id)
+      company_id: params[:jobs][:company_id])
     @user.jobs << @job
 
+    
     render json: @user.jobs
 
   end
@@ -68,7 +71,11 @@ class Api::V1::UsersController < ApplicationController
 private
 
 def user_params
-  params.require(:user).permit(:username, job_ids: [], jobs_attributes: [:title, :date_published, :contents, :museId, :location, :level, :date_saved, :applied_status, :date_applied, :response_date, :followup_date, :interview_invite, :interview_1_date, :interview_1_type, :interview_2_date, :interview_2_type, :company_id]
+  params.require(:user).permit(
+    :username,
+    job_ids: [],
+    jobs_attributes: [
+      :title, :date_published, :contents, :museId, :location, :level, :date_saved, :applied_status, :date_applied, :response_date, :followup_date, :interview_invite, :interview_1_date, :interview_1_type, :interview_2_date, :interview_2_type, :company_id]
     # , :password, :password_confirmation)
   )
 end
