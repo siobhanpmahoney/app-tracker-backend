@@ -8,4 +8,19 @@ class Job < ApplicationRecord
   has_many :categories, through: :job_categories
 
 
+
+  def save_company
+    company = self.company
+    Company.find_or_create_by(company[:museId])
+    company.jobs << self
+  end
+
+  def company_attributes=(company_attributes)
+    company_attributes.values.each do |c|
+      co = Company.find_or_create_by(c)
+      self.company = co
+    end 
+  end
+
+
 end

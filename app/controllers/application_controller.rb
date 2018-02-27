@@ -1,3 +1,6 @@
+require 'rest-client'
+require 'json'
+
 class ApplicationController < ActionController::API
 
   # private

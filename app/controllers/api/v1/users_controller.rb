@@ -45,9 +45,30 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def add_jobs
+
     @user = User.find(params[:id])
 
-    # @company
+    puts params[:jobs][:company_museId]
+
+    @company = Company.find_or_create_by(museId: params[:jobs][:company_museId])
+
+    
+
+    apiUrl = "https://api-v2.themuse.com/companies/" + @company.museId.to_s + "?api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00"
+
+    companyApiCall = JSON.parse(RestClient.get(apiUrl))
+
+    @company.update(
+      name: companyApiCall["name"],
+      size: companyApiCall["size"]["name"],
+      location: companyApiCall["locations"][0]["name"],
+      description: companyApiCall["description"],
+      museId: companyApiCall["id"],
+      twitter: companyApiCall["twitter"],
+      image_link: companyApiCall["refs"]["mini_f1_image"]
+    )
+
+
 
     @job = Job.create(
       title: params[:jobs][:title],
@@ -56,12 +77,18 @@ class Api::V1::UsersController < ApplicationController
       museId: params[:jobs][:museId],
       location: params[:jobs][:location],
       level: params[:jobs][:level],
+      company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
       applied_status: false,
-      company_id: params[:jobs][:company_id])
+      company_id: @company.id
+    )
+
     @user.jobs << @job
 
-    
+
+
+
+
     render json: @user.jobs
 
   end
@@ -75,7 +102,34 @@ def user_params
     :username,
     job_ids: [],
     jobs_attributes: [
-      :title, :date_published, :contents, :museId, :location, :level, :date_saved, :applied_status, :date_applied, :response_date, :followup_date, :interview_invite, :interview_1_date, :interview_1_type, :interview_2_date, :interview_2_type, :company_id]
+      :title,
+      :date_published,
+      :contents,
+      :museId,
+      :location,
+      :level,
+      :company_museId,
+      :date_saved,
+      :applied_status,
+      :date_applied,
+      :response_date,
+      :followup_date,
+      :interview_invite,
+      :interview_1_date,
+      :interview_1_type,
+      :interview_2_date,
+      :interview_2_type,
+      :company_id
+      # company_attributes: [
+      #   :name,
+      #   :size,
+      #   :location,
+      #   :description,
+      #   :museId,
+      #   :twitter,
+      #   :image_link
+      # ]
+    ]
     # , :password, :password_confirmation)
   )
 end

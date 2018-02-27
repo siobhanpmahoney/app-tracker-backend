@@ -36,6 +36,7 @@ class Api::V1::JobsController < ApplicationController
       :museId,
       :location,
       :level,
+      :company_museId,
       :date_saved,
       :applied_status,
       :date_applied,

@@ -20,7 +20,13 @@ class User < ApplicationRecord
     end
   end
 
-    
+  def user_companies
+    self.jobs.map do |j|
+      j.company
+    end.unique
+  end
+
+
 
   # def add_jobs (title, date_published, contents, museId, location, level, company_id)
   #   job = Job.create(

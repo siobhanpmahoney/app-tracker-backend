@@ -214,3 +214,22 @@ Job.all.each do |j|
   end
   category.jobs << j
 end
+
+# aJob = Job.create(
+#   title: "Server Engineer",
+#   date_published: "2018-01-10T07:34:21.820946Z",
+#   contents: "<strong>Somewhere along the way, CRM got really hard to use. We're changing that. ProsperWorks was built with three basic principles in mind: keep it simple, show what matters, and make it actionable. </strong>",
+#   museId: 788517,
+#   location: "San Francisco, CA",
+#   level: "Entry Level",
+#   date_saved: DateTime.now,
+#   applied_status: false,
+#   company: {
+#     name: "ProsperWorks",
+#     size: "Medium Size",
+#     location: "San Francisco, CA",
+#     description: "ProsperWorks provides a customer relationship management—CRM—system that makes work easier for sales teams.",
+#     museId: 1516,
+#     image_link: "https://pilbox.themuse.com/image.jpg?url=https%3A%2F%2Fassets.themuse.com%2Fuploaded%2Fcompanies%2F1516%2Fabout_modules%2F10207%2F2b0a3268-4f26-454e-b46f-ad7e33a4100f.jpg&h=135&w=183"
+#   }
+# )
