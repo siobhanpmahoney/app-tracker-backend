@@ -10,7 +10,8 @@ class Api::V1::UsersController < ApplicationController
     jobs = @user.jobs
     bookmarks = @user.bookmarks
     notes = @user.notes
-    user_info = {user: @user, jobs: jobs, bookmarks: bookmarks, notes: notes}
+    companies = @user.user_companies
+    user_info = {user: @user, jobs: jobs, companies: companies, bookmarks: bookmarks, notes: notes}
     render json: user_info, status: 200
   end
 
@@ -42,6 +43,13 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find(params[:id])
     user_jobs = @user.jobs
     render json: user_jobs
+  end
+
+  def user_job
+    @user = User.find(params[:id])
+    @job = Job.find(params[:job_id])
+    user_job = @user.jobs.find(@job.id)
+    render json: user_job
   end
 
   def user_companies
@@ -81,7 +89,8 @@ class Api::V1::UsersController < ApplicationController
       company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
       applied_status: false,
-      company: @company
+      company_id: @company.id,
+      company_attributes: @company
     )
 
     @user.jobs << @job
@@ -121,7 +130,7 @@ def user_params
       :interview_2_date,
       :interview_2_type,
       :company_id,
-      company: [
+      company_attributes: [
         :name,
         :size,
         :location,

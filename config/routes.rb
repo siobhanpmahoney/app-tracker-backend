@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post '/users/:id/jobs', to: 'users#add_jobs'
 
       get '/users/:id/companies', to: 'users#user_companies'
+      get '/users/:id/jobs/:job_id', to: 'users#user_job'
 
       # post '/login', to: 'auth#login'
       # get '/current_user', to: 'auth#currentUser'
