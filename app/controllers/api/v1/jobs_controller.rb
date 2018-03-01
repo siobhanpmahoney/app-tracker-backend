@@ -56,6 +56,10 @@ class Api::V1::JobsController < ApplicationController
         :museId,
         :twitter,
         :image_link
+      ],
+      category_ids: [],
+      categories_ids: [
+        :name
       ]
   end
 

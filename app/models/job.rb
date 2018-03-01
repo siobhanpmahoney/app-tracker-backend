@@ -19,7 +19,14 @@ class Job < ApplicationRecord
     company_attributes.values.each do |c|
       co = Company.find_or_create_by(c)
       self.company = co
-    end 
+    end
+  end
+
+  def category_attributes=(category_attributes)
+    category_attributes.values.each do |c|
+      category = Category.find_or_create_by(c)
+      self.categories << category
+    end
   end
 
 
