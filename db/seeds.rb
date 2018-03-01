@@ -103,11 +103,12 @@ Job.create(
 <p>If you feel like you are a good fit, you must include any relevant projects and your cover letter, where you tell us a little about yourself and why you think you’d be a great addition to our team!*</p>
 <p><strong><em>All your information will be kept confidential according to EEO guidelines.</em></strong></p>",
   museId: 111364,
+  company_museId:
   location: "New York City, NY",
   level: "intern",
   date_saved: DateTime.now,
   applied_status: false,
-  company_id: 6
+  company_id: 1
 )
 
 Job.create(

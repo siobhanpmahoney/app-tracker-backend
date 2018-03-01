@@ -58,15 +58,10 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def add_jobs
-
     @user = User.find(params[:id])
-
     @company = Company.find_or_create_by(museId: params[:jobs][:company_museId])
-
     apiUrl = "https://api-v2.themuse.com/companies/" + @company.museId.to_s + "?api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00"
-
     companyApiCall = JSON.parse(RestClient.get(apiUrl))
-
     @company.update(
       name: companyApiCall["name"],
       size: companyApiCall["size"]["name"],
@@ -76,9 +71,6 @@ class Api::V1::UsersController < ApplicationController
       twitter: companyApiCall["twitter"],
       image_link: companyApiCall["refs"]["mini_f1_image"]
     )
-
-
-
     @job = Job.create(
       title: params[:jobs][:title],
       date_published: params[:jobs][:date_published],
@@ -86,21 +78,49 @@ class Api::V1::UsersController < ApplicationController
       museId: params[:jobs][:museId],
       location: params[:jobs][:location],
       level: params[:jobs][:level],
+      company_name: @company.name,
       company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
       applied_status: false,
-      company_id: @company.id,
-      company_attributes: @company
+      company_id: @company.id
     )
-
     @user.jobs << @job
-
-
-
-
-
     render json: @user.jobs
+  end
 
+  def update_job
+    @user = User.find(params[:id])
+    puts "@user"
+    puts @user
+    @job = @user.jobs.find(params[:job_id])
+    puts "@job"
+
+     @user.jobs.find(params[:job_id]).update(
+      applied_status: params[:applied_status],
+      date_applied: params[:date_applied],
+      response_date: params[:response_date],
+      followup_date: params[:followup_date],
+      interview_invite: params[:interview_invite],
+      interview_1_date: params[:interview_1_date],
+      interview_1_type: params[:interview_1_type],
+      interview_2_date: params[:interview_2_date],
+      interview_2_type: params[:interview_2_type]
+     )
+    render json: {alert: "job saved!"}
+  end
+
+  def destroy_user_job
+    @user = User.find(params[:id])
+    @job = @user.jobs.find(params[:job_id])
+    puts ("here i am... before destroy")
+    puts @user.jobs
+    puts @user.jobs.length
+    @user.jobs.destroy(@job)
+    puts "here i am after destroy"
+    puts @user.jobs
+    puts @user.jobs.length
+
+    render json: {alert: "job deleted"}
   end
 
 
@@ -129,24 +149,11 @@ def user_params
       :interview_1_type,
       :interview_2_date,
       :interview_2_type,
-      :company_id,
-      company_attributes: [
-        :name,
-        :size,
-        :location,
-        :description,
-        :museId,
-        :twitter,
-        :image_link
-      ]
+      :company_id
     ]
     # , :password, :password_confirmation)
   )
 end
-
-
-
-
 
 
 end

@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20180220230800) do
     t.string "interview_2_type"
     t.string "interview_3_date"
     t.string "interview_3_type"
+    t.string "company_name"
     t.integer "company_museId"
     t.bigint "company_id"
     t.datetime "created_at", null: false

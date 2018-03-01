@@ -19,6 +19,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :interview_2_type
       t.string :interview_3_date
       t.string :interview_3_type
+      t.string :company_name
       t.integer :company_museId
       t.belongs_to :company
 
