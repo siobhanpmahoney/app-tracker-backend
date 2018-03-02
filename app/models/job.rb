@@ -29,5 +29,12 @@ class Job < ApplicationRecord
     end
   end
 
+  def note_attributes=(note_attributes)
+    note_attributes.values.each do |n|
+      note = Note.find_or_create_by |n|
+      self.notes << note
+    end
+  end 
+
 
 end

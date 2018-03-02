@@ -150,6 +150,15 @@ def user_params
       :interview_2_date,
       :interview_2_type,
       :company_id
+    ],
+    note_ids: [],
+    notes_attributes: [
+      :title,
+      :content,
+      :event,
+      :user_id,
+      :job_id,
+      :company_id
     ]
     # , :password, :password_confirmation)
   )
