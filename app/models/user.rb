@@ -4,11 +4,20 @@ class User < ApplicationRecord
   has_many :bookmarks
   has_many :notes
 
-  # has_secure_password
-  # validates :username, presence: true
-  #
-  # validates :password, presence: true
+  has_secure_password
+  validates :username, presence: true
 
+  validates :password, presence: true
+
+  has_secure_password
+  before_save { self.username = email.username }
+
+
+  validates :username, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
+
+  validates :password, presence: true, length: { in: 6..20 }, allow_nil: true
+
+ 
   def saved_jobs
     self.jobs
   end

@@ -129,7 +129,7 @@ private
 
 def user_params
   params.require(:user).permit(
-    :username,
+    :username, :password, :password_confirmation, 
     job_ids: [],
     jobs_attributes: [
       :title,
@@ -160,7 +160,7 @@ def user_params
       :job_id,
       :company_id
     ]
-    # , :password, :password_confirmation)
+
   )
 end
 
