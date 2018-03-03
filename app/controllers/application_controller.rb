@@ -3,9 +3,7 @@ require 'json'
 
 class ApplicationController < ActionController::API
 
-  private
 
-  private
 
   def encode_token(payload)
     JWT.encode(payload, secret, algorithm)

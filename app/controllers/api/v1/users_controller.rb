@@ -20,8 +20,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    @user=User.new(user_params)
-    if @user.save
+
+    @user.create(
+      username: params[:username],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
+    if @user
       render json: @user
     else
       render json: {message: "Error, new user not saved"}
@@ -129,7 +134,7 @@ private
 
 def user_params
   params.require(:user).permit(
-    :username, :password, :password_confirmation, 
+    :username, :password, :password_confirmation,
     job_ids: [],
     jobs_attributes: [
       :title,
