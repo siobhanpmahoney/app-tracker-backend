@@ -11,7 +11,8 @@ class Api::V1::UsersController < ApplicationController
     bookmarks = @user.bookmarks
     notes = @user.notes
     companies = @user.user_companies
-    user_info = {user: @user, jobs: jobs, companies: companies, bookmarks: bookmarks, notes: notes}
+    bookmarks = @user.bookmarks
+    user_info = {user: @user, jobs: jobs, companies: companies, bookmarks: bookmarks, notes: notes, bookmarks: bookmarks}
     render json: user_info, status: 200
   end
 
@@ -20,7 +21,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-
     @user.create(
       username: params[:username],
       password: params[:password],
@@ -164,6 +164,15 @@ def user_params
       :user_id,
       :job_id,
       :company_id
+    ],
+    bookmark_ids: [],
+    bookmarks_attributes: [
+      :title,
+      :url,
+      :event,
+      :user_id,
+      :company_id,
+      :job_id
     ]
 
   )

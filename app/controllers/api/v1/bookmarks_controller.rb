@@ -1,16 +1,21 @@
 class Api::V1::BookmarksController < ApplicationController
 
   def index
-    bookmarks = Bookmark.all
-    render json: bookmarks, status: 200
+    @bookmarks = Bookmark.all
+    render json: @bookmarks, status: 200
   end
 
   def create
-    bookmark = Bookmark.create(bookmark_params)
-    render json: bookmark, status: 201
+    @bookmark = Bookmark.create(bookmark_params)
+    bookmark_company = Company.find(params[:company_id])
+    bookmark_job = Job.find(params[:job_id])
+    bookmark_user = User.find(params[:user_id])
+    bookmark_info = {bookmark: @bookmark, company: bookmark_company, job: bookmark_job, user: bookmark_user}
+    render json: bookmark_info
   end
 
   def update
+    @bookmark = Bookmark.find(params[:id])
     @bookmark.update(bookmark_params)
     render json: @bookmark, status: 200
   end
@@ -22,7 +27,12 @@ class Api::V1::BookmarksController < ApplicationController
   end
 
   def show
-    render json: @bookmark, status: 200
+    @bookmark = Bookmark.find(params[:id])
+    bookmark_company = Company.find(params[:company_id])
+    bookmark_job = Job.find(params[:job_id])
+    bookmark_user = User.find(params[:user_id])
+    bookmark_info = {bookmark: @bookmark, company: bookmark_company, job: bookmark_job, user: bookmark_user}
+    render json: bookmark_info, status: 200
   end
 
   private
