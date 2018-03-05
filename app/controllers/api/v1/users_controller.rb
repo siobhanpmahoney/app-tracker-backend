@@ -62,6 +62,19 @@ class Api::V1::UsersController < ApplicationController
     render json: @user.user_companies
   end
 
+  def user_company
+    @user = User.find(params[:id])
+    @company = Company.find(params[:company_id])
+    company_notes = @user.notes.find_by(company_id: @company.id)
+
+    company_jobs = @user.jobs.select {|j| j.company_id == @company.id }
+
+
+    company_bookmarks = @user.bookmarks.find_by(company_id: @company.id)
+    company_info = {company: @company, company_notes: company_notes, company_jobs: company_jobs, company_bookmarks: company_bookmarks}
+    render json: company_info
+  end
+
   def add_jobs
     @user = User.find(params[:id])
     @company = Company.find_or_create_by(museId: params[:jobs][:company_museId])
@@ -74,7 +87,7 @@ class Api::V1::UsersController < ApplicationController
       description: companyApiCall["description"],
       museId: companyApiCall["id"],
       twitter: companyApiCall["twitter"],
-      image_link: companyApiCall["refs"]["mini_f1_image"]
+      image_link: companyApiCall["refs"]["f1_image"]
     )
     @job = Job.create(
       title: params[:jobs][:title],

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       delete '/users/:id/jobs/:job_id', to: 'users#destroy_user_job'
 
       get '/users/:id/companies', to: 'users#user_companies'
+      get '/users/:id/companies/:company_id', to: 'users#user_company'
       get '/users/:id/jobs/:job_id', to: 'users#user_job'
       patch '/users/:id/jobs/:job_id', to: 'users#update_job'
 

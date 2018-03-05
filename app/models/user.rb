@@ -29,11 +29,18 @@ class User < ApplicationRecord
     end
   end
 
+
   def user_companies
-    self.jobs.map do |j|
-      j.company
+    final = []
+    self.jobs.each do |job|
+      if !final.any? {|c| c.museId==job.company_museId}
+        final << job.company
+      end
     end
+    return final
   end
+
+
 
 
 
