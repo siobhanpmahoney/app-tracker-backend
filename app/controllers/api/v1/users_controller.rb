@@ -141,6 +141,34 @@ class Api::V1::UsersController < ApplicationController
     render json: {alert: "job deleted"}
   end
 
+  def user_notes
+    @user = User.find(params[:id])
+    user_notes = @user.notes
+    render json: user_notes
+  end
+
+  def add_notes
+
+    @user = User.find(params[:id])
+    byebug
+    puts @user
+
+
+    @note = Note.create(title: params[:notes][:title], content: params[:notes][:content], user_id: @user.id, company_id: params[:notes][:company_id], job_id: params[:notes][:job_id])
+    byebug
+    @user.notes << @note
+    render json: @note
+  end
+
+
+  def notes_and_bookmarks
+    @user = User.find[params[:id]]
+    notes = @user.notes
+    bookmarks = @user.bookmarks
+    notes_and_bookmarks = {user: @user, notes: notes, bookmarks: bookmarks}
+    render json: notes_and_bookmarks
+  end
+
 
 
 private
@@ -187,7 +215,6 @@ def user_params
       :company_id,
       :job_id
     ]
-
   )
 end
 

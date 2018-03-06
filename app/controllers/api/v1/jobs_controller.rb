@@ -60,6 +60,14 @@ class Api::V1::JobsController < ApplicationController
       category_ids: [],
       categories_ids: [
         :name
+      ],
+      note_ids: [],
+      notes_ids: [
+        :title,
+        :content,
+        :user_id,
+        :job_id,
+        :company_id
       ]
   end
 

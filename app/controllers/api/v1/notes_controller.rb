@@ -7,12 +7,10 @@ class Api::V1::NotesController < ApplicationController
   end
 
   def create
-    @note = Note.create(note_params)
-    note_company = Company.find(params[:company_id])
-    note_job = Job.find(params[:job_id])
-    note_user = User.find(params[:user_id])
-    note_info = {note: @note, company: note_company, job: note_job, user: note_user}
-    render json: note_info
+    @note = Note.create(title: params[:note][:title], content: params[:note][:content], user_id: params[:note][:user_id], company_id: params[:note][:company_id], job_id: params[:note][:job_id])
+    @user = User.find(params[:note][:user_id])
+
+    render json: @note
   end
 
   def update

@@ -23,6 +23,31 @@
   )
 end
 
+# Bookmark.create(
+#   title: "More tech companies sue FCC over net neutrality",
+#   url: "https://mashable.com/2018/03/05/tech-companies-sue-fcc-net-neutrality-foursquare-etsy-kickstarter/",
+#   user_id: 1,
+#   company_id: 13
+# )
+#
+# Bookmark.create(title:'How the net neutrality repeal will hurt small businesses -- including anyone who sells things on sites like Etsy', url: "https://www.businessinsider.com/tim-ryan-how-fcc-net-neutrality-repeal-hurt-small-business-trump-2017-12", user_id: 1, company_id: 13)
+#
+# Bookmark.create(
+#   title: "Uber's Vetting Expert Tells Jury Waymo Engineer Deal Was Rushed - Bloomberg",
+#   url: "https://www.bloomberg.com/news/articles/2018-02-08/uber-s-vetting-expert-tells-jury-waymo-engineer-deal-was-rushed",
+#   user_id: 1,
+#   company_id: 15
+# )
+#
+# Bookmark.create(
+#   title: "Former Uber CEO Travis Kalanick is scheduled to testify Tuesday in the Waymo vs. Uber trial",
+#   url: "https://www.businessinsider.com/former-uber-ceo-travis-kalanick-to-testify-in-waymo-trial-2018-2",
+#   user_id: 1,
+#   company_id: 15
+# )
+
+
+
 
 
 # # Company.create(name:"Facebook", size:"large", location: "Menlo Park, CA", description: "Facebook is the largest social media network, enabling over a billion users to openly connect with friends and family, share content, and discover the world.", museId: 659, twitter: "facebook", image_link: "https://pilbox.themuse.com/image.jpg?url=https%3A%2F%2Fassets.themuse.com%2Fuploaded%2Fcompanies%2F659%2Fabout_modules%2F9538%2Fd9b76611-1618-40af-942f-32c8389761e7.jpg&h=135&w=183")
