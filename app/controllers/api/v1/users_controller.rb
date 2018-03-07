@@ -142,7 +142,7 @@ class Api::V1::UsersController < ApplicationController
     interview_1_date: params[:interview_1_date],
     interview_1_type: params[:interview_1_type],
     interview_1_technical: params[:interview_1_technical],
-    interview_1_technical: params[:interview_1_response],
+    interview_1_response: params[:interview_1_response],
     interview_2_date: params[:interview_2_date],
     interview_2_type: params[:interview_2_type],
     interview_2_technical: params[:interview_2_technical],
