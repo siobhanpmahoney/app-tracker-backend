@@ -3,7 +3,7 @@ class CreateNotes < ActiveRecord::Migration[5.1]
     create_table :notes do |t|
       t.string :title
       t.text :content
-      t.string :event
+  
       t.belongs_to :user
       t.belongs_to :company
       t.belongs_to :job

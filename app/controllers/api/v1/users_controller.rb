@@ -108,6 +108,7 @@ class Api::V1::UsersController < ApplicationController
       company_name: @company.name,
       company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
+      overall_active_status: true,
       applied_status: false,
       category_id: @category.id,
       company_id: @company.id
@@ -125,16 +126,34 @@ class Api::V1::UsersController < ApplicationController
     puts "@job"
 
      @user.jobs.find(params[:job_id]).update(
-      applied_status: params[:applied_status],
-      date_applied: params[:date_applied],
-      response_date: params[:response_date],
-      followup_date: params[:followup_date],
-      interview_invite: params[:interview_invite],
-      interview_1_date: params[:interview_1_date],
-      interview_1_type: params[:interview_1_type],
-      interview_2_date: params[:interview_2_date],
-      interview_2_type: params[:interview_2_type]
-     )
+     #  applied_status: params[:applied_status],
+     #  date_applied: params[:date_applied],
+     #  interview_invite: params[:interview_invite],
+     #  interview_1_date: params[:interview_1_date],
+     #  interview_1_type: params[:interview_1_type],
+     #  interview_2_date: params[:interview_2_date],
+     #  interview_2_type: params[:interview_2_type]
+     # )
+    overall_active_status: params[:overall_active_status],
+    applied_status: params[:applied_status],
+    date_applied: params[:date_applied],
+    application_response_status: params[:application_response_status],
+    interview_invite: params[:interview_invite],
+    interview_1_date: params[:interview_1_date],
+    interview_1_type: params[:interview_1_type],
+    interview_1_technical: params[:interview_1_technical],
+    interview_1_technical: params[:interview_1_response],
+    interview_2_date: params[:interview_2_date],
+    interview_2_type: params[:interview_2_type],
+    interview_2_technical: params[:interview_2_technical],
+    interview_2_response: params[:interview_2_response],
+    interview_3_date: params[:interview_3_date],
+    interview_3_type: params[:interview_3_type],
+    interview_3_technical: params[:interview_3_technical],
+    interview_3_response: params[:interview_3_response],
+    offer_status: params[:offer_status]
+  )
+
     render json: {alert: "job saved!"}
   end
 
@@ -195,19 +214,29 @@ def user_params
       :museId,
       :location,
       :level,
-      :company_museId,
       :date_saved,
+      :overall_active_status,
       :applied_status,
       :date_applied,
-      :response_date,
-      :followup_date,
+      :application_response_status,
       :interview_invite,
       :interview_1_date,
       :interview_1_type,
+      :interview_1_technical,
+      :interview_1_response,
       :interview_2_date,
       :interview_2_type,
-      :company_id,
+      :interview_2_technical,
+      :interview_2_response,
+      :interview_3_date,
+      :interview_3_type,
+      :interview_3_technical,
+      :interview_3_response,
+      :offer_status,
+      :company_name,
+      :company_museId,
       :category_id,
+      :company_id,
       category: [
         :name
       ]
@@ -216,7 +245,6 @@ def user_params
     notes_attributes: [
       :title,
       :content,
-      :event,
       :user_id,
       :job_id,
       :company_id
@@ -225,7 +253,6 @@ def user_params
     bookmarks_attributes: [
       :title,
       :url,
-      :event,
       :user_id,
       :company_id,
       :job_id
