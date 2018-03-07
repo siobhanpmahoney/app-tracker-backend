@@ -70,6 +70,15 @@ class Api::V1::CompaniesController < ApplicationControlle
         :user_id,
         :company_id,
         :job_id
+      ],
+      bookmark_ids: [],
+      bookmarks_attributes: [
+        :title,
+        :url,
+        :event,
+        :user_id,
+        :company_id,
+        :job_id
       ]
     )
   end

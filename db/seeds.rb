@@ -9,6 +9,40 @@
 #
 #
 
+bk1 = Bookmark.create(
+  url: "https://www.prnewswire.com/news-releases/genesys-acquires-altocloud-to-empower-all-businesses-with-improved-sales-and-service-results-through-ai-and-journey-analytics-300604612.html",
+  title: "Genesys Acquires Altocloud to Empower All Businesses with Improved Sales and Service Results Through AI and Journey Analytics",
+  user_id: 1,
+  company_id: 8
+)
+
+bk2 = Bookmark.create(
+  title:"Dropbox files for IPO of up to $500 million",
+  url: "https://www.reuters.com/article/us-dropbox-ipo/dropbox-files-for-ipo-of-up-to-500-million-idUSKCN1G72NF",
+  user_id: 1,
+  company_id: 8
+)
+
+bk3 = Bookmark.create(
+  title: "Dropbox IPO: A Few Takeaways From The S-1",
+  url: "https://seekingalpha.com/article/4152938-dropbox-ipo-takeaways-sminus-1",
+  user_id: 1,
+  company_id: 8
+)
+
+bk4 = Bookmark.create(
+  title: "The Best Thing for Dropbox Was Breaking Up With the Cloud",
+  url: "https://www.bloomberg.com/gadfly/articles/2018-03-01/dropbox-s-best-move-was-breaking-up-with-amazon-s-cloud",
+  user_id: 1,
+  company_id: 8
+)
+
+bk5 = Bookmark.create(
+  title: "Dropbox partners with Google to add G Suite integrations for Docs, Sheets, and Slides",
+  url: "https://www.theverge.com/2018/3/1/17067336/dropbox-google-partnership-g-suite-integrations-business-docs-sheets",
+  user_id: 1,
+  company_id: 8
+)
 
 25.times do
   siobhan = User.find(1)
@@ -17,6 +51,20 @@
   Note.create(
     title: "#{Faker::Hacker.ingverb} #{Faker::Hacker.adjective} #{Faker::Hacker.noun}",
     content: "#{Faker::Hacker.say_something_smart} #{Faker::Hipster.paragraph(2, false, 4)}",
+    user_id: 1,
+    job_id: job.id,
+    company_id: company.id
+  )
+end
+
+job_number = 5*Job.all.length
+job_number.times do
+  siobhan = User.find(1)
+  job=siobhan.jobs.sample
+  company=job.company
+  Note.create(
+    title: "#{company.name} — #{Faker::Job.field} (#{Faker::Hacker.ingverb} #{Faker::Hacker.adjective} #{Faker::Hacker.noun})",
+    content: "#{Faker::Job.field} — #{Faker::Job.key_skill}, #{Faker::Job.key_skill}, +  #{Faker::Job.key_skill}. #{Faker::Hipster.paragraph(2, false, 4)}",
     user_id: 1,
     job_id: job.id,
     company_id: company.id

@@ -68,6 +68,15 @@ class Api::V1::JobsController < ApplicationController
         :user_id,
         :job_id,
         :company_id
+      ],
+      bookmark_ids: [],
+      bookmarks_attributes: [
+        :title,
+        :url,
+        :event,
+        :user_id,
+        :company_id,
+        :job_id
       ]
   end
 

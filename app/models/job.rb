@@ -34,7 +34,24 @@ class Job < ApplicationRecord
       note = Note.find_or_create_by |n|
       self.notes << note
     end
-  end 
+  end
+
+  def bookmark_attributes=(bookmark_attributes)
+    bookmark_attributes.values.each do |n|
+      bookmark = Bookmark.find_or_create_by(n)
+      self.bookmarks << bookmark
+    end
+  end
+
+  def rel_bookmarks(userId)
+    company=Company.find(self.company_id)
+    user = User.find(userId)
+    user.bookmarks.select do |bk|
+      bk.company_id == self.company.id
+    end
+  end
+
+
 
 
 end

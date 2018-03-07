@@ -1,5 +1,5 @@
 class Bookmark < ApplicationRecord
   belongs_to :user
-  has_one :company
-  has_one :job
+  belongs_to :company
+  belongs_to :job, optional: true
 end

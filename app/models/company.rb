@@ -11,5 +11,12 @@ class Company < ApplicationRecord
       self.jobs << job
     end
   end
-  
+
+  def bookmark_attributes=(bookmark_attributes)
+    bookmark_attributes.values.each do |n|
+      bookmark = Bookmark.find_or_create_by(n)
+      self.bookmarks << bookmark
+    end
+  end 
+
 end

@@ -54,6 +54,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find(params[:id])
     @job = Job.find(params[:job_id])
     user_job = @user.jobs.find(@job.id)
+
     render json: user_job
   end
 
