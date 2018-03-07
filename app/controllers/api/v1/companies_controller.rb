@@ -41,6 +41,7 @@ class Api::V1::CompaniesController < ApplicationControlle
       :museId,
       :twitter,
       :image_link,
+      :industry_id,
       job_ids: [],
       jobs_attributes: [
         :title,

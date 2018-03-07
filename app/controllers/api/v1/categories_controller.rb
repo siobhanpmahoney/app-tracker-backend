@@ -49,16 +49,7 @@ class Api::V1::CategoriesController < ApplicationController
         :interview_1_type,
         :interview_2_date,
         :interview_2_type,
-        :company_id,
-        company: [
-          :name,
-          :size,
-          :location,
-          :description,
-          :museId,
-          :twitter,
-          :image_link
-          ]
+        :company_id
         ]
     )
   end

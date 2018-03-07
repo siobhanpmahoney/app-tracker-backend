@@ -22,6 +22,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :company_name
       t.integer :company_museId
       t.belongs_to :company
+      t.belongs_to :category
 
       t.timestamps
     end

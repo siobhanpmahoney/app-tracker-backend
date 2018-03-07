@@ -47,6 +47,7 @@ class Api::V1::JobsController < ApplicationController
       :interview_1_type,
       :interview_2_date,
       :interview_2_type,
+      :category_id,
       :company_id,
       company: [
         :name,
@@ -55,11 +56,8 @@ class Api::V1::JobsController < ApplicationController
         :description,
         :museId,
         :twitter,
-        :image_link
-      ],
-      category_ids: [],
-      categories_ids: [
-        :name
+        :image_link,
+        :industry_id
       ],
       note_ids: [],
       notes_ids: [

@@ -1,6 +1,5 @@
 class Category < ApplicationRecord
-  has_many :job_categories
-  has_many :jobs, through: :job_categories
+  has_many :jobs
 
   def job_attributes=(job_attributes)
     job_attributes.values.each do |job|

@@ -43,32 +43,16 @@ ActiveRecord::Schema.define(version: 20180220230800) do
     t.integer "museId"
     t.string "twitter"
     t.string "image_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "company_industries", force: :cascade do |t|
-    t.bigint "company_id"
     t.bigint "industry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_company_industries_on_company_id"
-    t.index ["industry_id"], name: "index_company_industries_on_industry_id"
+    t.index ["industry_id"], name: "index_companies_on_industry_id"
   end
 
   create_table "industries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "job_categories", force: :cascade do |t|
-    t.bigint "job_id"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_job_categories_on_category_id"
-    t.index ["job_id"], name: "index_job_categories_on_job_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -93,8 +77,10 @@ ActiveRecord::Schema.define(version: 20180220230800) do
     t.string "company_name"
     t.integer "company_museId"
     t.bigint "company_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_jobs_on_category_id"
     t.index ["company_id"], name: "index_jobs_on_company_id"
   end
 

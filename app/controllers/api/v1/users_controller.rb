@@ -77,10 +77,16 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def add_jobs
+
     @user = User.find(params[:id])
+
     @company = Company.find_or_create_by(museId: params[:jobs][:company_museId])
     apiUrl = "https://api-v2.themuse.com/companies/" + @company.museId.to_s + "?api-key=82b2d1f745512b99a70044e6c6b316d86739a97719d5e88caf67a3f7fd788a00"
     companyApiCall = JSON.parse(RestClient.get(apiUrl))
+
+    @industry = Industry.find_or_create_by(name: companyApiCall["industries"][0]["name"])
+    @category = Category.find_or_create_by(name: params[:jobs][:category])
+
     @company.update(
       name: companyApiCall["name"],
       size: companyApiCall["size"]["name"],
@@ -88,8 +94,10 @@ class Api::V1::UsersController < ApplicationController
       description: companyApiCall["description"],
       museId: companyApiCall["id"],
       twitter: companyApiCall["twitter"],
-      image_link: companyApiCall["refs"]["f1_image"]
+      image_link: companyApiCall["refs"]["f1_image"],
+      industry_id: @industry.id
     )
+
     @job = Job.create(
       title: params[:jobs][:title],
       date_published: params[:jobs][:date_published],
@@ -101,8 +109,10 @@ class Api::V1::UsersController < ApplicationController
       company_museId: params[:jobs][:company_museId],
       date_saved: DateTime.now,
       applied_status: false,
+      category_id: @category.id,
       company_id: @company.id
     )
+
     @user.jobs << @job
     render json: @user.jobs
   end
@@ -196,7 +206,11 @@ def user_params
       :interview_1_type,
       :interview_2_date,
       :interview_2_type,
-      :company_id
+      :company_id,
+      :category_id,
+      category: [
+        :name
+      ]
     ],
     note_ids: [],
     notes_attributes: [

@@ -41,7 +41,7 @@ class User < ApplicationRecord
       bookmark = Bookmark.find_or_create_by(n)
       self.bookmarks << bookmark
     end
-  end 
+  end
 
 
   def user_companies
@@ -53,6 +53,30 @@ class User < ApplicationRecord
     end
     return final
   end
+
+  def user_categories
+    final = []
+    self.jobs.each do |job|
+      job.categories.each do |category|
+        if !final.include?(category)
+          final << category
+        end
+      end
+    end
+    return final
+  end
+
+  def user_industries
+    final = []
+    self.user_companies.each do |company|
+      company.industries.each do |industry|
+        if !final.include?(industry)
+          final << industry
+        end
+      end
+    end
+    return final
+  end 
 
 
 

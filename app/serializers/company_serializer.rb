@@ -3,5 +3,5 @@ class CompanySerializer < ActiveModel::Serializer
   has_many :jobs
   has_many :bookmarks
   has_many :notes
-  has_many :industries
+  belongs_to :industry
 end

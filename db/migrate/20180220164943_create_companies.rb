@@ -8,6 +8,7 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
       t.integer :museId
       t.string :twitter
       t.string :image_link
+      t.belongs_to :industry
 
       t.timestamps
     end

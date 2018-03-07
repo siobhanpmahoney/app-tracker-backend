@@ -6,5 +6,5 @@ class JobSerializer < ActiveModel::Serializer
   has_many :notes
   has_many :bookmarks
 
-  has_many :categories
+  belongs_to :category
 end
