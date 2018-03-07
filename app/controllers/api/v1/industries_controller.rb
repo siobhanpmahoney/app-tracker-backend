@@ -39,6 +39,9 @@ class Api::V1::IndustriesController < ApplicationController
     :museId,
     :twitter,
     :image_link,
+    :image_link2,
+    :image_mini,
+    :company_logo,
     :industry_id])
   end
 end

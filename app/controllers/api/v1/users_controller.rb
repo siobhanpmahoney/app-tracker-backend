@@ -11,8 +11,10 @@ class Api::V1::UsersController < ApplicationController
     bookmarks = @user.bookmarks
     notes = @user.notes
     companies = @user.user_companies
+    categories = @user.user_categories
     bookmarks = @user.bookmarks
-    user_info = {user: @user, jobs: jobs, companies: companies, bookmarks: bookmarks, notes: notes, bookmarks: bookmarks}
+    industries = @user.user_industries
+    user_info = {user: @user, jobs: jobs, companies: companies, bookmarks: bookmarks, notes: notes, bookmarks: bookmarks, categories: categories, industries: industries}
     render json: user_info, status: 200
   end
 
@@ -85,7 +87,7 @@ class Api::V1::UsersController < ApplicationController
     companyApiCall = JSON.parse(RestClient.get(apiUrl))
 
     @industry = Industry.find_or_create_by(name: companyApiCall["industries"][0]["name"])
-    @category = Category.find_or_create_by(name: params[:jobs][:category])
+    @category = Category.find_or_create_by(name: params[:jobs][:category][0]["name"])
 
     @company.update(
       name: companyApiCall["name"],
@@ -95,7 +97,11 @@ class Api::V1::UsersController < ApplicationController
       museId: companyApiCall["id"],
       twitter: companyApiCall["twitter"],
       image_link: companyApiCall["refs"]["f1_image"],
-      industry_id: @industry.id
+      image_link2: companyApiCall["refs"]["f2_image"],
+      image_mini: companyApiCall["refs"]["mini_f1_image"],
+      company_logo: companyApiCall["refs"]["logo_image"],
+      industry_id: @industry.id,
+      industry_name: @industry.name,
     )
 
     @job = Job.create(
@@ -110,6 +116,8 @@ class Api::V1::UsersController < ApplicationController
       date_saved: DateTime.now,
       overall_active_status: true,
       applied_status: false,
+      company_industry: @industry.name,
+      category_name: @category.name,
       category_id: @category.id,
       company_id: @company.id
     )
@@ -235,6 +243,8 @@ def user_params
       :offer_status,
       :company_name,
       :company_museId,
+      :company_industry,
+      :category_name,
       :category_id,
       :company_id,
       category: [

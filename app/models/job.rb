@@ -9,6 +9,7 @@ class Job < ApplicationRecord
 
 
 
+
   def save_company
     company = self.company
     Company.find_or_create_by(company[:museId])
@@ -22,11 +23,9 @@ class Job < ApplicationRecord
     end
   end
 
-  def category_attributes=(category_attributes)
-    category_attributes.values.each do |c|
-      category = Category.find_or_create_by(c)
-      self.categories << category
-    end
+  def job_category
+    category = Category.find(self.category_id)
+    return category.name
   end
 
   def note_attributes=(note_attributes)

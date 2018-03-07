@@ -2,7 +2,8 @@ class Api::V1::JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     company = @job.company
-    render json: @job
+    category = Category.find(@job.category_id)
+    render json: {job: @job, company: company, category: category}
   end
 
   def index
@@ -57,6 +58,8 @@ class Api::V1::JobsController < ApplicationController
       :offer_status,
       :company_name,
       :company_museId,
+      :company_industry,
+      :category_name,
       :category_id,
       :company_id,
       company: [
@@ -67,6 +70,10 @@ class Api::V1::JobsController < ApplicationController
         :museId,
         :twitter,
         :image_link,
+        :image_link2,
+        :image_mini,
+        :company_logo,
+        :industry_name,
         :industry_id
       ],
       note_ids: [],
@@ -84,7 +91,7 @@ class Api::V1::JobsController < ApplicationController
         :user_id,
         :company_id,
         :job_id
-      ]
+      ])
   end
 
 

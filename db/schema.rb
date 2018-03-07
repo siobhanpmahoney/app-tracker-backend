@@ -42,6 +42,10 @@ ActiveRecord::Schema.define(version: 20180220230800) do
     t.integer "museId"
     t.string "twitter"
     t.string "image_link"
+    t.string "image_link2"
+    t.string "image_mini"
+    t.string "company_logo"
+    t.string "industry_name"
     t.bigint "industry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,6 +85,8 @@ ActiveRecord::Schema.define(version: 20180220230800) do
     t.string "interview_3_response"
     t.boolean "offer_status"
     t.string "company_name"
+    t.string "company_industry"
+    t.string "category_name"
     t.integer "company_museId"
     t.bigint "company_id"
     t.bigint "category_id"

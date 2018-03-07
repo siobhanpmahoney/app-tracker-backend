@@ -57,10 +57,9 @@ class User < ApplicationRecord
   def user_categories
     final = []
     self.jobs.each do |job|
-      job.categories.each do |category|
-        if !final.include?(category)
-          final << category
-        end
+      category = Category.find(job.category_id)
+      if !final.any? {|c| c.name == category.name}
+        final << category
       end
     end
     return final
@@ -69,14 +68,13 @@ class User < ApplicationRecord
   def user_industries
     final = []
     self.user_companies.each do |company|
-      company.industries.each do |industry|
-        if !final.include?(industry)
-          final << industry
-        end
+      industry = Industry.find(company.industry_id)
+      if !final.any?{|i| i.name == industry.name}
+        final << industry
       end
     end
     return final
-  end 
+  end
 
 
 

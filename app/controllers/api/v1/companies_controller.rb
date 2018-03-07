@@ -41,6 +41,10 @@ class Api::V1::CompaniesController < ApplicationControlle
       :museId,
       :twitter,
       :image_link,
+      :industry_name,
+      :image_link2,
+      :image_mini,
+      :company_logo,
       :industry_id,
       job_ids: [],
       jobs_attributes: [
@@ -71,6 +75,8 @@ class Api::V1::CompaniesController < ApplicationControlle
         :offer_status,
         :company_name,
         :company_museId,
+        :company_industry,
+        :category_name,
         :category_id,
         :company_id
       ],

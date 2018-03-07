@@ -27,6 +27,8 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :interview_3_response
       t.boolean :offer_status
       t.string :company_name
+      t.string :company_industry
+      t.string :category_name
       t.integer :company_museId
       t.belongs_to :company
       t.belongs_to :category

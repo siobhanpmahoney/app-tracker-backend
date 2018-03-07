@@ -59,6 +59,8 @@ class Api::V1::CategoriesController < ApplicationController
         :offer_status,
         :company_name,
         :company_museId,
+        :company_industry,
+        :category_name,
         :category_id,
         :company_id
         ]
