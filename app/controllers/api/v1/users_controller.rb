@@ -11,10 +11,11 @@ class Api::V1::UsersController < ApplicationController
     bookmarks = @user.bookmarks
     notes = @user.notes
     companies = @user.user_companies
+
     categories = @user.user_categories
     bookmarks = @user.bookmarks
     industries = @user.user_industries
-    user_info = {user: @user, jobs: jobs, companies: companies, bookmarks: bookmarks, notes: notes, bookmarks: bookmarks, categories: categories, industries: industries}
+    user_info = {user: @user, jobs: jobs, companies: companies, notes: notes, bookmarks: bookmarks, categories: categories, industries: industries}
     render json: user_info, status: 200
   end
 
@@ -87,7 +88,9 @@ class Api::V1::UsersController < ApplicationController
     companyApiCall = JSON.parse(RestClient.get(apiUrl))
 
     @industry = Industry.find_or_create_by(name: companyApiCall["industries"][0]["name"])
-    @category = Category.find_or_create_by(name: params[:jobs][:category][0]["name"])
+    if params["jobs"]["category"] && params["jobs"]["category"].length > 0
+      @category = Category.find_or_create_by(name: params["jobs"]["category"][0]["name"])
+    end
 
     @company.update(
       name: companyApiCall["name"],
@@ -117,10 +120,12 @@ class Api::V1::UsersController < ApplicationController
       overall_active_status: true,
       applied_status: false,
       company_industry: @industry.name,
-      category_name: @category.name,
-      category_id: @category.id,
       company_id: @company.id
     )
+
+    if @category
+      @job.update(category_name: @category.name, category_id: @category.id)
+    end
 
     @user.jobs << @job
     render json: @user.jobs

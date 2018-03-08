@@ -57,9 +57,12 @@ class User < ApplicationRecord
   def user_categories
     final = []
     self.jobs.each do |job|
-      category = Category.find(job.category_id)
-      if !final.any? {|c| c.name == category.name}
-        final << category
+      if job.category_id
+        puts job.category_id
+        @category = Category.find(job.category_id)
+        if !final.any? {|c| c["name"] == @category["name"]}
+          final << @category
+        end
       end
     end
     return final
