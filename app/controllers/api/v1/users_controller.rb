@@ -88,8 +88,9 @@ class Api::V1::UsersController < ApplicationController
     companyApiCall = JSON.parse(RestClient.get(apiUrl))
 
     @industry = Industry.find_or_create_by(name: companyApiCall["industries"][0]["name"])
-    if params["jobs"]["category"] && params["jobs"]["category"].length > 0
-      @category = Category.find_or_create_by(name: params["jobs"]["category"][0]["name"])
+
+    if params["jobs"]["category"]
+      @category = Category.find_or_create_by(name: params["jobs"]["category"]["name"])
     end
 
     @company.update(
@@ -193,12 +194,12 @@ class Api::V1::UsersController < ApplicationController
   def add_notes
 
     @user = User.find(params[:id])
-    byebug
+
     puts @user
 
 
     @note = Note.create(title: params[:notes][:title], content: params[:notes][:content], user_id: @user.id, company_id: params[:notes][:company_id], job_id: params[:notes][:job_id])
-    byebug
+    
     @user.notes << @note
     render json: @note
   end
