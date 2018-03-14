@@ -199,7 +199,7 @@ class Api::V1::UsersController < ApplicationController
 
 
     @note = Note.create(title: params[:notes][:title], content: params[:notes][:content], user_id: @user.id, company_id: params[:notes][:company_id], job_id: params[:notes][:job_id])
-    
+
     @user.notes << @note
     render json: @note
   end
@@ -268,6 +268,8 @@ def user_params
     bookmark_ids: [],
     bookmarks_attributes: [
       :title,
+      :source_name,
+      :summary,
       :url,
       :user_id,
       :company_id,

@@ -8,7 +8,7 @@ class Api::V1::BookmarksController < ApplicationController
   def create
     # @bookmark = Bookmark.create(bookmark_params)
 
-    @bookmark = Bookmark.create(title: params[:bookmark][:title], url: params[:bookmark][:url], user_id: params[:bookmark][:user_id], company_id: params[:bookmark][:company_id])
+    @bookmark = Bookmark.create(title: params[:bookmark][:title], source_name: params[:bookmark][:source_name], summary: params[:bookmark][:summary], url: params[:bookmark][:url], user_id: params[:bookmark][:user_id], company_id: params[:bookmark][:company_id])
     render json: @bookmark
   end
 
@@ -35,7 +35,7 @@ class Api::V1::BookmarksController < ApplicationController
 
   private
   def bookmark_params
-    params.permit(:title, :url, :user_id, :company_id, :job_id)
+    params.permit(:title, :source_name, :summary, :url, :user_id, :company_id, :job_id)
   end
 
 end

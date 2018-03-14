@@ -87,6 +87,8 @@ class Api::V1::JobsController < ApplicationController
       bookmark_ids: [],
       bookmarks_attributes: [
         :title,
+        :source_name,
+        :summary,
         :url,
         :user_id,
         :company_id,

@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20180220230800) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "title"
+    t.string "source_name"
+    t.text "summary"
     t.string "url"
     t.bigint "user_id"
     t.bigint "company_id"
